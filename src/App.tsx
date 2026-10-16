@@ -1,11 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { Navbar } from "./components/Navbar";
 import { ProfileHeader } from "./components/ProfileHeader";
+import { GemstoneVault } from "./components/GemstoneVault";
+import { DiamondInspector } from "./components/DiamondInspector";
 import { InstagramCarousel } from "./components/InstagramCarousel";
 import { ProfessionalCredentials } from "./components/ProfessionalCredentials";
-import { LightboxModal } from "./components/LightboxModal";
 import { Footer } from "./components/Footer";
 import { PROFILE_DATA, CarouselPost } from "./data/profileData";
+
+const LightboxModal = lazy(() =>
+  import("./components/LightboxModal").then((m) => ({ default: m.LightboxModal }))
+);
 
 export default function App() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
@@ -49,9 +54,15 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1">
         {/* Profile Header Hero Section */}
-        <ProfileHeader onExploreGallery={() => handleScrollTo("featured-pairing")} />
+        <ProfileHeader onExploreGallery={() => handleScrollTo("vault")} />
 
-        {/* New 4-Post Carousel: Watches & Diamonds (Added above the 8-post gallery) */}
+        {/* NEW FEATURE: The Gemstone Vault (Diamonds, Emeralds, Rubies, Sapphires, Fancy Colored) */}
+        <GemstoneVault />
+
+        {/* NEW FEATURE: Diamond Inspector (The 4Cs: Cut, Color, Clarity, Carat Weight) */}
+        <DiamondInspector />
+
+        {/* Curated 4-Post Carousel: Watches & Diamonds */}
         <InstagramCarousel
           id="featured-pairing"
           badgeLabel="Curated Pairing"
@@ -79,13 +90,17 @@ export default function App() {
       <Footer />
 
       {/* Lightbox Modal for Fullscreen Image Inspection */}
-      <LightboxModal
-        currentIndex={lightboxIndex}
-        posts={activeLightboxPosts}
-        onClose={handleCloseLightbox}
-        onNext={handleNextLightbox}
-        onPrev={handlePrevLightbox}
-      />
+      {lightboxIndex !== null && (
+        <Suspense fallback={null}>
+          <LightboxModal
+            currentIndex={lightboxIndex}
+            posts={activeLightboxPosts}
+            onClose={handleCloseLightbox}
+            onNext={handleNextLightbox}
+            onPrev={handlePrevLightbox}
+          />
+        </Suspense>
+      )}
     </div>
   );
 }
