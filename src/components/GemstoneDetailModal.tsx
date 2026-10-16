@@ -6,7 +6,6 @@ import {
   Layers,
   Sparkles,
   ExternalLink,
-  MessageSquare,
   Copy,
   Check,
   ShieldAlert,
@@ -47,12 +46,6 @@ export const GemstoneDetailModal: React.FC<GemstoneDetailModalProps> = ({
   if (!gemstone) return null;
 
   const inquiryMessage = `Hello Bryant Rose, I would like to request information regarding the ${gemstone.name} (${gemstone.category}) from your official Gemstone Vault.`;
-
-  // WhatsApp integration: check env or format prefilled WhatsApp link
-  const whatsappNumber = import.meta.env.VITE_WHATSAPP_NUMBER || "";
-  const whatsappUrl = whatsappNumber
-    ? `https://wa.me/${whatsappNumber.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(inquiryMessage)}`
-    : `https://wa.me/?text=${encodeURIComponent(inquiryMessage)}`;
 
   const handleCopyMessage = () => {
     navigator.clipboard.writeText(inquiryMessage);
@@ -254,17 +247,6 @@ export const GemstoneDetailModal: React.FC<GemstoneDetailModalProps> = ({
               {copied ? <Check className="h-3.5 w-3.5 text-emerald-400" /> : <Copy className="h-3.5 w-3.5" />}
               <span>{copied ? "Copied" : "Copy Inquiry"}</span>
             </button>
-
-            {/* WhatsApp Contact Action */}
-            <a
-              href={whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 rounded-lg border border-emerald-600/40 bg-emerald-950/40 px-3.5 py-2 text-xs font-medium text-emerald-200 hover:bg-emerald-900/60 hover:text-white transition-colors cursor-pointer"
-            >
-              <MessageSquare className="h-3.5 w-3.5" />
-              <span>WhatsApp Inquiry</span>
-            </a>
 
             {/* Instagram DM Action */}
             <a

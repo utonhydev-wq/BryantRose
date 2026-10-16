@@ -26,6 +26,13 @@ export const Navbar: React.FC<NavbarProps> = ({ onScrollTo }) => {
         <nav className="hidden md:flex items-center gap-6 text-xs font-medium tracking-wide uppercase text-zinc-400">
           <button
             type="button"
+            onClick={() => onScrollTo("featured-pairing")}
+            className="hover:text-zinc-100 transition-colors whitespace-nowrap cursor-pointer"
+          >
+            Gallery
+          </button>
+          <button
+            type="button"
             onClick={() => onScrollTo("vault")}
             className="hover:text-zinc-100 transition-colors whitespace-nowrap cursor-pointer"
           >
@@ -37,13 +44,6 @@ export const Navbar: React.FC<NavbarProps> = ({ onScrollTo }) => {
             className="hover:text-zinc-100 transition-colors whitespace-nowrap cursor-pointer"
           >
             4Cs Inspector
-          </button>
-          <button
-            type="button"
-            onClick={() => onScrollTo("featured-pairing")}
-            className="hover:text-zinc-100 transition-colors whitespace-nowrap cursor-pointer"
-          >
-            Gallery
           </button>
           <button
             type="button"

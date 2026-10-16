@@ -54,15 +54,9 @@ export default function App() {
       {/* Main Content Area */}
       <main className="flex-1">
         {/* Profile Header Hero Section */}
-        <ProfileHeader onExploreGallery={() => handleScrollTo("vault")} />
+        <ProfileHeader onExploreGallery={() => handleScrollTo("featured-pairing")} />
 
-        {/* NEW FEATURE: The Gemstone Vault (Diamonds, Emeralds, Rubies, Sapphires, Fancy Colored) */}
-        <GemstoneVault />
-
-        {/* NEW FEATURE: Diamond Inspector (The 4Cs: Cut, Color, Clarity, Carat Weight) */}
-        <DiamondInspector />
-
-        {/* Curated 4-Post Carousel: Watches & Diamonds */}
+        {/* Curated 4-Post Carousel: Watches & Diamonds (At the beginning) */}
         <InstagramCarousel
           id="featured-pairing"
           badgeLabel="Curated Pairing"
@@ -72,7 +66,7 @@ export default function App() {
           onOpenLightbox={handleOpenLightbox}
         />
 
-        {/* Dedicated 8-Image Automatic Carousel */}
+        {/* Dedicated 8-Image Automatic Carousel (At the beginning) */}
         <InstagramCarousel
           id="gallery"
           badgeLabel="Instagram Visual Portfolio"
@@ -81,6 +75,12 @@ export default function App() {
           posts={PROFILE_DATA.carouselPosts}
           onOpenLightbox={handleOpenLightbox}
         />
+
+        {/* The Gemstone Vault (Diamonds, Emeralds, Rubies, Sapphires, Fancy Colored) */}
+        <GemstoneVault />
+
+        {/* Diamond Inspector (The 4Cs: Cut, Color, Clarity, Carat Weight) */}
+        <DiamondInspector />
 
         {/* Professional Content: Entrepreneur & Investor / Gemology & Precious Stones */}
         <ProfessionalCredentials />
